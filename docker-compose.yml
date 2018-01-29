@@ -180,7 +180,7 @@ sonar-mysql:
 sonar:
   container_name: sonar
   restart: always
-  image: deangodfree/adop-sonar:20
+  image: deangodfree/adop-sonar:22
   #build: ../images/docker-sonar/
   net: ${CUSTOM_NETWORK_NAME}
   expose:
