@@ -302,10 +302,10 @@ selenium-node-firefox:
     HUB_PORT_4444_TCP_ADDR: "selenium-hub"
     HUB_PORT_4444_TCP_PORT: "4444"
    
-    nexus:
+nexus:
   container_name: nexus
   restart: always
-  image:  deangodfree/adop-nexus:26
+  image: deangodfree/adop-nexus:26
   net: ${CUSTOM_NETWORK_NAME}
   expose:
     - "8081"
