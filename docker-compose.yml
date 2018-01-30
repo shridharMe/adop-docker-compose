@@ -323,7 +323,7 @@ nexus:
     LDAP_AUTH: "simple"
     NEXUS_SONATYPE: "/opt/sonatype/nexus"
     NEXUS_CONTEXT: "nexus"
-    NEXUS_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD}
+    NEXUS_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD_PLAIN}
 
 ldap-ltb:
   container_name: ldap-ltb
