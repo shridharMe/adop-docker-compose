@@ -318,7 +318,7 @@ selenium-node-firefox:
     LDAP_USER_PASSWORD_ATTRIBUTE: "userPassword"
     LDAP_USER_BASE_DN: "${LDAP_USER_BASE_DN}"
     LDAP_GROUP_BASE_DN: "${LDAP_GROUP_BASE_DN}"
-    LDAP_BIND_PASSWORD: ${LDAP_PWD}
+    LDAP_BIND_PASSWORD: "${LDAP_PWD}"
     LDAP_NAME: "nexus"
     LDAP_AUTH: "simple"
     NEXUS_SONATYPE: "/opt/sonatype/nexus"
