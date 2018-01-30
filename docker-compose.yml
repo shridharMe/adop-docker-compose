@@ -319,11 +319,11 @@ selenium-node-firefox:
     LDAP_USER_BASE_DN: ${LDAP_USER_BASE_DN}
     LDAP_GROUP_BASE_DN: ${LDAP_GROUP_BASE_DN}
     LDAP_BIND_PASSWORD: ${LDAP_PWD}
-    LDAP_NAME: "nexus"
-    LDAP_AUTH: "simple"
-    NEXUS_SONATYPE: "/opt/sonatype/nexus"
-    NEXUS_CONTEXT: "nexus" 
-    NEXUS_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD}
+    LDAP_NAME: "nexus"
+    LDAP_AUTH: "simple"
+    NEXUS_SONATYPE: "/opt/sonatype/nexus"
+    NEXUS_CONTEXT: "nexus"
+    NEXUS_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD}
 
 ldap-ltb:
   container_name: ldap-ltb
