@@ -180,7 +180,7 @@ sonar-mysql:
 sonar:
   container_name: sonar
   restart: always
-  image: deangodfree/adop-sonar:24
+  image: deangodfree/adop-sonar:latest
   #build: ../images/docker-sonar/
   net: ${CUSTOM_NETWORK_NAME}
   expose:
@@ -204,7 +204,7 @@ sonar:
 jenkins:
   container_name: jenkins
   restart: always
-  image: deangodfree/adop-jenkins:36
+  image: deangodfree/adop-jenkins:latest
   #build: ../images/docker-jenkins/
   net: ${CUSTOM_NETWORK_NAME}
   ports:
@@ -305,7 +305,7 @@ selenium-node-firefox:
 nexus:
   container_name: nexus
   restart: always
-  image: deangodfree/adop-nexus:35
+  image: deangodfree/adop-nexus:latest
   net: ${CUSTOM_NETWORK_NAME}
   expose:
     - "8081"
@@ -324,6 +324,7 @@ nexus:
     NEXUS_SONATYPE: "/opt/sonatype/nexus"
     NEXUS_CONTEXT: "nexus"
     NEXUS_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD_PLAIN}
+    AEM_ENABLED=true
 
 ldap-ltb:
   container_name: ldap-ltb
