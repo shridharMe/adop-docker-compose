@@ -246,7 +246,7 @@ esac
 # Use the ADOP CLI
 eval $(docker-machine env ${MACHINE_NAME})
 
-./adop compose -m "${MACHINE_NAME}" ${CLI_COMPOSE_OPTS} init
+./adop compose -m "${MACHINE_NAME}" ${CLI_COMPOSE_OPTS} init --with-stdout
 
 # Generate and export Self-Signed SSL certificate for Docker Registry, applicable only for AWS type
 if [ ${MACHINE_TYPE} == "aws" ]; then
