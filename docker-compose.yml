@@ -258,6 +258,8 @@ jenkins:
     DOCKER_CLIENT_CERT_PATH: ${DOCKER_CLIENT_CERT_PATH}
     DOCKER_NETWORK_NAME: ${CUSTOM_NETWORK_NAME}
     CARTRIDGE_SOURCES: ${CARTRIDGE_SOURCES}
+    JENKINS_SHARED_LIBRARY: "ssh://git@innersource.accenture.com/gskdo/jenkins-pipeline-libs.git"
+    AEM_SHARED_LIBRARY: "ssh://git@innersource.accenture.com/gskdo/aem-pipeline-libs.git"
 
 jenkins-slave:
   container_name: jenkins-slave
