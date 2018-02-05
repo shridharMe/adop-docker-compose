@@ -326,7 +326,7 @@ nexus:
     NEXUS_SONATYPE: "/opt/sonatype/nexus"
     NEXUS_CONTEXT: "nexus"
     NEXUS_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD_PLAIN}
-    AEM_ENABLED=true
+    AEM_ENABLED: "true"
 
 ldap-ltb:
   container_name: ldap-ltb
