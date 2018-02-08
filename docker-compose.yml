@@ -264,11 +264,11 @@ jenkins:
 jenkins-slave:
   container_name: jenkins-slave
   restart: always
-  image: accenture/adop-jenkins-slave:0.1.4
+  image: deangodfree/adop-jenkins-slave:latest
   net: ${CUSTOM_NETWORK_NAME}
   privileged: true
   environment:
-    SLAVE_LABELS: "aws ldap java8 docker"
+    SLAVE_LABELS: "aws ldap java8 docker terraform"
     SWARM_PASSWORD: ${PASSWORD_JENKINS}
     SLAVE_EXECUTORS: ${SLAVE_EXECUTORS}
     INITIAL_ADMIN_USER: ${INITIAL_ADMIN_USER}
