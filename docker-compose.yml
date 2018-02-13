@@ -214,6 +214,9 @@ jenkins:
     - "50000"
   privileged: true
   environment:
+  # Passwords Pairs used in the maskpassword.groovy in init.groovy.d
+    JENKINS_MASK_PASSWORD_VARS: "SONAR_ACCOUNT_PASSWORD,LDAP_MANAGER_PASSWORD,INITIAL_ADMIN_PASSWORD,GERRIT_JENKINS_PASSWORD,CREDENTIALS_LDAP_SERVICE_USER_PASSWORD"
+  # MASKPASSWORD: ""
     JENKINS_OPTS: "--prefix=/jenkins"
     ROOT_URL: "${PROTO}://${TARGET_HOST}/jenkins/"
     LDAP_SERVER: "${LDAP_SERVER}"
