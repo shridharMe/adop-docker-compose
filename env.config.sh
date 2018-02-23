@@ -4,6 +4,8 @@
 # LDAP
 
 export LDAP_SERVER="ldap:389"
+export LDAP_PORT="389"
+export LDAP_HOST="ldap"
 export LDAP_DOMAIN="ldap.example.com"
 export LDAP_FULL_DOMAIN="dc=ldap,dc=example,dc=com"
 export LDAP_USER_BASE_DN="ou=people"
@@ -58,3 +60,4 @@ export DOCKER_CLIENT_CERT_PATH="//root/.docker/"
 
 # SSL Settings
 export PROTO="http"
+

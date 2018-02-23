@@ -4,7 +4,7 @@
 proxy:
   container_name: proxy
   restart: always
-  image: accenture/adop-nginx:0.3.2
+  image: deangodfree/adop-nginx:latest
   #build: ../images/docker-nginx/
   net: ${CUSTOM_NETWORK_NAME}
   ports:
@@ -94,75 +94,6 @@ gerrit:
     - "USER_NAME=${GERRIT_USER_NAME}"
     - "USER_EMAIL=${GERRIT_USER_EMAIL}"
     - "DOWNLOAD_SCHEME=http"
-
-sensu-uchiwa:
-  container_name: sensu-uchiwa
-  restart: always
-  image: sstarcher/uchiwa:0.15.0
-  net: ${CUSTOM_NETWORK_NAME}
-  environment:
-    SENSU_HOSTNAME: sensu-api
-    SENSU_DC_NAME: Sensu
-  expose:
-    - "3000"
-
-sensu-api:
-  container_name: sensu-api
-  restart: always
-  image: accenture/adop-sensu:0.2.0
-  net: ${CUSTOM_NETWORK_NAME}
-  command: api
-  expose:
-    - "4567"
-  environment:
-    TRANSPORT_NAME: rabbitmq
-    RABBITMQ_HOST: sensu-rabbitmq
-    REDIS_HOST: sensu-redis
-
-sensu-server:
-  container_name: sensu-server
-  restart: always
-  image: accenture/adop-sensu:0.2.0
-  net: ${CUSTOM_NETWORK_NAME}
-  command: server
-  environment:
-    API_HOST: sensu-api
-    RABBITMQ_HOST: sensu-rabbitmq
-    REDIS_HOST: sensu-redis
-    TRANSPORT_NAME: rabbitmq
-
-sensu-client:
-  container_name: sensu-client
-  restart: always
-  image: accenture/adop-sensu:0.2.0
-  net: ${CUSTOM_NETWORK_NAME}
-  command: client
-  environment:
-    TRANSPORT_NAME: rabbitmq
-    CLIENT_NAME: core
-    CLIENT_ADDRESS: 127.0.0.1
-    RABBITMQ_HOST: sensu-rabbitmq
-    JENKINS_PREFIX: jenkins
-    CLIENT_SUBSCRIPTIONS: "proxy,gerrit,jenkins,nexus,sonarqube,sensu,kibana"
-
-sensu-rabbitmq:
-  container_name: sensu-rabbitmq
-  restart: always
-  image: rabbitmq:3.5.7-management
-  net: ${CUSTOM_NETWORK_NAME}
-  expose:
-    - "5672"
-    - "5671"
-    - "15672"
-    - "15671"
-
-sensu-redis:
-  container_name: sensu-redis
-  restart: always
-  image: redis:3.0.7
-  net: ${CUSTOM_NETWORK_NAME}
-  expose:
-    - "6379"
 
 sonar-mysql:
   container_name: sonar-mysql

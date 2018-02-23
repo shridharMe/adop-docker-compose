@@ -289,6 +289,9 @@ run_compose() {
 
     ELKFILEOPTS="-f ${CLI_DIR}/compose/elk.yml"
 
+    DOCKPROMFILEOPTS="-f ${CLI_DIR}/compose/dockprom/docker-compose.yml"
+
+
     # If total overrides have been provided then just use them
     # Else use "our" file list
     if [ ! -z "${TOTAL_OVERRIDES}"   ]; then
@@ -297,9 +300,9 @@ run_compose() {
         # Handle up vs up -d so that we can launch the main Compose file
         if [ "${compose_cmd}" = "up" ] && [[ $@ != *"-d"* ]]; then
           echo "* Starting ELK with 'up -d' instead of just the requested 'up'"
-          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" -d
+          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" -d && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" -d
         else
-          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@"
+          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@"
         fi;
         echo
         docker-compose ${ADOPFILEOPTS} ${OVERRIDES} ${compose_cmd} "$@"

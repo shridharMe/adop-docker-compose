@@ -24,41 +24,23 @@ gerrit:
     syslog-address: "udp://${LOGSTASH_HOST}:25826"
     tag: "gerrit"
 
-sensu-uchiwa:
+grafana:
   log_driver: "syslog"
   log_opt:
     syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "sensu-uchiwa"
+    tag: "grafana"
 
-sensu-api:
+prometheus:
   log_driver: "syslog"
   log_opt:
     syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "sensu-api"
+    tag: "prometheus"
 
-sensu-server:
+alertmanager:
   log_driver: "syslog"
   log_opt:
     syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "sensu-server"
-
-sensu-client:
-  log_driver: "syslog"
-  log_opt:
-    syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "sensu-client"
-
-sensu-rabbitmq:
-  log_driver: "syslog"
-  log_opt:
-    syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "sensu-rabbitmq"
-
-sensu-redis:
-  log_driver: "syslog"
-  log_opt:
-    syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "sensu-redis"
+    tag: "alertmanager"
 
 sonar-mysql:
   log_driver: "syslog"
