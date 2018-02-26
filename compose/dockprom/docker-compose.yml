@@ -89,7 +89,7 @@ grafana:
     - LDAP_MANAGER_DN="${LDAP_MANAGER_DN}"
     - LDAP_MANAGER_PASSWORD=${LDAP_PWD}
     - LDAP_SEARCH_FILTER="${LDAP_USER_SEARCH}"
-    - LDAP_ROOT_DN="${LDAP_FULL_DOMAIN}"
+    - LDAP_ROOT_DN=${LDAP_FULL_DOMAIN}
     - LDAP_MAIL_ADDRESS_ATTRIBUTE_NAME="mail"
     - LDAP_ADMIN_GROUP_DN="cn=administrators,ou=groups,dc=ldap,dc=example,dc=com"
     - LDAP_USER_GROUP_DN="cn=sonar-users,ou=groups,dc=ldap,dc=example,dc=com"
