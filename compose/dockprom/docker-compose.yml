@@ -76,8 +76,6 @@ cadvisor:
 grafana:
   image: deangodfree/adop-grafana:latest
   container_name: grafana
-  volumes:
-    -  grafana_data:/var/lib/grafana
   environment:
     - GF_SECURITY_ADMIN_USER=${INITIAL_ADMIN_USER}
     - GF_SECURITY_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD_PLAIN}
