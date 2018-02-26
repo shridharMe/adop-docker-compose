@@ -78,7 +78,8 @@ grafana:
   container_name: grafana
   volumes:
     -  grafana_data:/var/lib/grafana
-  entrypoint: /docker-entrypoint.sh
+    - ./grafana/setup.sh:/setup.sh
+  entrypoint: /setup.sh
   environment:
     - GF_SECURITY_ADMIN_USER=${INITIAL_ADMIN_USER}
     - GF_SECURITY_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD_PLAIN}
