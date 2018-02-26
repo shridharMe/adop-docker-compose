@@ -82,9 +82,9 @@ grafana:
     - GF_USERS_ALLOW_SIGN_UP=false
     - LDAP_HOST="${LDAP_HOST}"
     - LDAP_PORT="${LDAP_PORT}"
-    - LDAP_SSL="false"
-    - LDAP_TLS="false"
-    - LDAP_SKIP_CERT_VERIFY="false"
+    - LDAP_SSL=false
+    - LDAP_TLS=false
+    - LDAP_SKIP_CERT_VERIFY=false
     - LDAP_CERT_PATH="/path/to/certificate.crt"
     - LDAP_MANAGER_DN="${LDAP_MANAGER_DN}"
     - LDAP_MANAGER_PASSWORD=${LDAP_PWD}
