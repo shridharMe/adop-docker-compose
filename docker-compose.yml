@@ -24,7 +24,7 @@ proxy:
 gitlab:
   container_name: gitlab
   restart: always
-  image: gitlab/gitlab-ce:8.15.4-ce.1
+  image: gitlab/gitlab-ce:10.2.8-ce.0
   net: ${CUSTOM_NETWORK_NAME}
   expose:
     - "80"
