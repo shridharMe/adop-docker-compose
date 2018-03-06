@@ -53,7 +53,7 @@ export SONAR_DB_PASSWORD=${SONAR_MYSQL_PASSWORD}
 export CARTRIDGE_SOURCES="https://raw.githubusercontent.com/Accenture/adop-cartridges/master/cartridges.yml"
 
 # Jenkins Slave
-export SLAVE_EXECUTORS=1
+export SLAVE_EXECUTORS=2
 
 # Jenkins Certificate Path
 ####
