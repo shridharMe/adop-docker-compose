@@ -19,6 +19,65 @@ proxy:
     - "LDAP_GROUP_ATTRIBUTE=member"
     - "LDAP_USER_ID_ATTRIBUTE=cn"
     - "LDAP_USER_OBJECT_CLASS=inetOrgPerson"
+    - "GIT_REPO=gitlab"
+
+gitlab:
+  container_name: gitlab
+  restart: always
+  image: gitlab/gitlab-ce:8.15.4-ce.1
+  net: ${CUSTOM_NETWORK_NAME}
+  expose:
+    - "80"
+    - "443"
+    - "22"
+  volumes:
+    - gitlab_etc:/etc/gitlab
+    - gitlab_opt:/var/opt/gitlab
+    - gitlab_log:/var/log/gitlab
+  environment:
+    GITLAB_ROOT_PASSWORD: ${PASSWORD_GITLAB}
+    GITLAB_OMNIBUS_CONFIG: |
+      gitlab_rails['smtp_enable'] = '${ADOP_SMTP_ENABLED}'
+      gitlab_rails['smtp_address'] = 'mail-server'
+      gitlab_rails['smtp_port'] = 25
+      gitlab_rails['smtp_user_name'] = '${INITIAL_ADMIN_USER}@${LDAP_DOMAIN}'
+      gitlab_rails['smtp_password'] = '${INITIAL_ADMIN_PASSWORD_PLAIN}'
+      gitlab_rails['smtp_domain'] = '${SMTP_DOMAIN}'
+      gitlab_rails['smtp_authentication'] = 'login'
+      gitlab_rails['smtp_enable_starttls_auto'] = true
+      gitlab_rails['smtp_openssl_verify_mode'] = 'peer'
+      gitlab_rails['ldap_enabled'] = true
+      gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+        main:
+          label: 'LDAP'
+          host: ldap
+          port: 389
+          uid: 'uid'
+          method: 'plain'
+          bind_dn: 'cn=admin,${LDAP_FULL_DOMAIN}'
+          password: '${LDAP_PWD}'
+          active_directory: false
+          allow_username_or_email_login: false
+          block_auto_created_users: false
+          base: '${LDAP_FULL_DOMAIN}'
+      EOS
+      
+mail-server:
+  image: tvial/docker-mailserver:v2
+  hostname: mail-server
+  domainname: "${SMTP_DOMAIN}"
+  net: "${CUSTOM_NETWORK_NAME}"
+  restart: "always"
+  container_name: mail-server
+  ports:
+  # Because port 25 may already be running on your host..
+    - "9025:25"
+    - "143:143"
+    - "587:587"
+    - "993:993"
+  volumes:
+    - maildata:/var/mail
+    - ../../mail-config/:/tmp/docker-mailserver/
 
 ldap:
   container_name: ldap
@@ -195,6 +254,13 @@ jenkins:
     CARTRIDGE_SOURCES: ${CARTRIDGE_SOURCES}
     JENKINS_SHARED_LIBRARY: "ssh://git@innersource.accenture.com/gskdo/jenkins-pipeline-libs.git"
     AEM_SHARED_LIBRARY: "ssh://git@innersource.accenture.com/gskdo/aem-pipeline-libs.git"
+    ADOP_GERRIT_ENABLED: "false"
+    ADOP_GITLAB_ENABLED: "true"
+    GIT_REPO: "gitlab"
+    GITLAB_FRONT_END_URL: "http://gitlab/gitlab"
+    GITLAB_JENKINS_USERNAME: "jenkins"
+    GITLAB_JENKINS_PASSWORD: ${PASSWORD_JENKINS}
+    GITLAB_ROOT_PASSWORD: ${PASSWORD_GITLAB}
 
 jenkins-slave:
   container_name: jenkins-slave
@@ -203,11 +269,12 @@ jenkins-slave:
   net: ${CUSTOM_NETWORK_NAME}
   privileged: true
   environment:
-    SLAVE_LABELS: "aws ldap java8 docker terraform"
+    SLAVE_LABELS: "aws ldap java8 docker terraform tower"
     SWARM_PASSWORD: ${PASSWORD_JENKINS}
     SLAVE_EXECUTORS: ${SLAVE_EXECUTORS}
     INITIAL_ADMIN_USER: ${INITIAL_ADMIN_USER}
     INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD_PLAIN}
+    PASSWORD_GITLAB: ${PASSWORD_GITLAB}
 
 selenium-hub:
   container_name: selenium-hub
