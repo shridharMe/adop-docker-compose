@@ -22,21 +22,6 @@ prometheus:
   labels:
     org.label-schema.group: "monitoring"
 
-alertmanager:
-  image: prom/alertmanager:v0.14.0
-  container_name: alertmanager
-  volumes: 
-    - ./alertmanager/:/etc/alertmanager/
-  command:
-    - '--config.file=/etc/alertmanager/config.yml'
-    - '--storage.path=/alertmanager'
-  restart: unless-stopped
-  expose:
-    - 9093
-  net: ${CUSTOM_NETWORK_NAME}
-  labels:
-    org.label-schema.group: "monitoring"
-
 nodeexporter:
   image: prom/node-exporter:v0.15.2
   container_name: nodeexporter
